@@ -21,25 +21,27 @@ let transporter = nodemailer.createTransport({
     port: 465,
     secure: true, // secure:true for port 465, secure:false for port 587
     auth: {
-        user: 'sam2k13@gmail.com',
-        pass: 'pianoman'
+        user: 'pincbot@gmail.com',
+        pass: 'Pincsummer2018'
     }
 });
 
 app.post('/checkin', function (req, res) {
 
-  let pincOptions = {
-      from: '"Fred Foo 👻" <somethind@gmail.com>', // sender address
-      to: req.body.email, // list of receivers
-      subject: req.body.subject, // Subject line
-      text: req.body.body // plain text body
+  let pincEmail = {
+      from: 'PINC International', // sender address
+      to: 'sam2k13@gmail.com', // list of receivers
+      subject: 'Weekend Check-In: ' + req.body.name + ' - ' + req.body.destination, // Subject line
+      text: 'Personal Info\n' + req.body.name + '\n' + req.body.email + '\n\nDestination Info\nDestiantion: ' + req.body.destination + '\nAccomadation Type: ' + req.body.accomodation_type + '\nAddress: ' + req.body.address + '\n\nDeparture\nDeparture Time: ' + req.body.departure_departure_time +
+      '\nArrival Time: ' +  req.body.departure_departure_time + '\n\nReturn\nDeparture Time: ' + req.body.return_departure_time + '\nArrival Time: ' + req.body.return_arrival_time// plain text body
   };
 
-  let confirmOptions = {
+  let confirmEmail = {
       from: '"Fred Foo 👻" <somethind@gmail.com>', // sender address
       to: req.body.confirmEmail, // list of receivers
-      subject: req.body.confirmSubject, // Subject line
-      text: req.body.confirmBody // plain text body
+      subject: 'Check-In Submitted', // Subject line
+      text:  req.body.name + ',Thank you for letting us know your weekend plans!  Have a great time and stay safe.\n\nLisette\n\nCheck-In Info\nDestiantion: ' + req.body.destination + '\nAccomadation Type: ' + req.body.accomodation_type + '\nAddress: ' + req.body.address + '\nDeparture\nDeparture Time: ' + req.body.departure_departure_time +
+        '\nArrival Time: ' +  req.body.departure_departure_time + '\nReturn\nDeparture Time: ' + req.body.return_departure_time + '\nArrival Time: ' + req.body.return_arrival_time// plain text body
   };
 
   if(req.body.passcode == "hoi145k"){
@@ -47,28 +49,20 @@ app.post('/checkin', function (req, res) {
     transporter.sendMail(pincOptions, (error, info) => {
         if (error) {
           console.log(error);
-          res.status(500).send('Checkin Failed to Submit!')
+          res.status(500).send('Check-In Failed to Submit!')
         }
-        if(req.body.sendConfirm){
-          transporter.sendMail(confirmOptions, (error, info) => {
-              if (error) {
-                console.log(error);
-                res.status(500).send('Checkin Submitted! Confirmation email failed to send')
-              }
-              console.log("Checkin Submitted")
-              res.send('Checkin Submitted successfully. A confirmation email has been sent to ' + req.body.email)
-          });
-        }
-        else{
-          res.send('Checkin Submitted successfully.')
-        }
-
-
-        // res.send('Checkin Submitted successfully. A confirmation email has been sent to ' + req.body.email)
+        transporter.sendMail(confirmOptions, (error, info) => {
+            if (error) {
+              console.log(error);
+              res.status(500).send('Check-In Submitted, but confirmation email failed to send')
+            }
+            console.log("Checkin Submitted")
+            res.send('Check-In Submitted successfully. A confirmation email has been sent to ' + req.body.email)
+        });
     });
   }
   else{
-    res.status(401).send("Invalid Passcode");
+    res.status(401).send();
   }
 });
 
@@ -77,7 +71,7 @@ app.get('/', function (req, res) {
 });
 
 // setup server
-app.listen(1338);
+app.listen(1332);
 
 
 
