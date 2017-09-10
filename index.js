@@ -41,7 +41,7 @@ app.post('/checkin', function (req, res) {
       from: 'PINC International', // sender address
       to: req.body.email, // list of receivers
       subject: 'Check-In Submitted', // Subject line
-      text:  req.body.name + ',Thank you for letting us know your weekend plans!  Have a great time and stay safe.\n\nLisette\n\nCheck-In Info\nDestiantion: ' + req.body.destination + '\nAccomadation Type: ' + req.body.accomodation_type + '\nAddress: ' + req.body.address + '\nDeparture\nDeparture Time: ' + req.body.departure_departure_time +
+      text:  req.body.name + ',\nThank you for letting us know your weekend plans!  Have a great time and stay safe.\n\nLisette\n\nCheck-In Info\nDestiantion: ' + req.body.destination + '\nAccomadation Type: ' + req.body.accomodation_type + '\nAddress: ' + req.body.address + '\nDeparture\nDeparture Time: ' + req.body.departure_departure_time +
         '\nArrival Time: ' +  req.body.departure_departure_time + '\nReturn\nDeparture Time: ' + req.body.return_departure_time + '\nArrival Time: ' + req.body.return_arrival_time// plain text body
   };
 
