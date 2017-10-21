@@ -1,3 +1,4 @@
+
 // include modules
 var express = require('express'),
     app = express(),
@@ -37,23 +38,23 @@ app.post('/checkin', function (req, res) {
   };
 
   let confirmEmail = {
-      from: '"Fred Foo 👻" <somethind@gmail.com>', // sender address
-      to: req.body.confirmEmail, // list of receivers
+      from: 'PINC International', // sender address
+      to: req.body.email, // list of receivers
       subject: 'Check-In Submitted', // Subject line
-      text:  req.body.name + ',Thank you for letting us know your weekend plans!  Have a great time and stay safe.\n\nLisette\n\nCheck-In Info\nDestiantion: ' + req.body.destination + '\nAccomadation Type: ' + req.body.accomodation_type + '\nAddress: ' + req.body.address + '\nDeparture\nDeparture Time: ' + req.body.departure_departure_time +
+      text:  req.body.name + ',\nThank you for letting us know your weekend plans!  Have a great time and stay safe.\n\nLisette\n\nCheck-In Info\nDestiantion: ' + req.body.destination + '\nAccomadation Type: ' + req.body.accomodation_type + '\nAddress: ' + req.body.address + '\nDeparture\nDeparture Time: ' + req.body.departure_departure_time +
         '\nArrival Time: ' +  req.body.departure_departure_time + '\nReturn\nDeparture Time: ' + req.body.return_departure_time + '\nArrival Time: ' + req.body.return_arrival_time// plain text body
   };
 
   if(req.body.passcode == "hoi145k"){
     // send mail with defined transport object
-    transporter.sendMail(pincOptions, (error, info) => {
+    transporter.sendMail(pincEmail, (error, info) => {
         if (error) {
           console.log(error);
           res.status(500).send('Check-In Failed to Submit!')
         }
-        transporter.sendMail(confirmOptions, (error, info) => {
-            if (error) {
-              console.log(error);
+        transporter.sendMail(confirmEmail, (error2, info2) => {
+            if (error2) {
+              console.log(error2);
               res.status(500).send('Check-In Submitted, but confirmation email failed to send')
             }
             console.log("Checkin Submitted")
@@ -67,12 +68,10 @@ app.post('/checkin', function (req, res) {
 });
 
 app.get('/', function (req, res) {
-  res.send("Oops! This idea was kind of a dud")
+  res.send("Yes, I'm Alive and well")
 });
 
 // setup server
 app.listen(1332);
 
 
-
-// setup email data with unicode symbols
