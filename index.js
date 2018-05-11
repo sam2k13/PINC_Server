@@ -31,7 +31,7 @@ app.post('/checkin', function (req, res) {
 
   let pincEmail = {
       from: 'PINC International', // sender address
-      to: 'pincbot@gmail.com', // list of receivers
+      to: 'info@pincinternational.com', // list of receivers
       subject: 'Weekend Check-In: ' + req.body.name + ' - ' + req.body.destination, // Subject line
       text: 'Personal Info\n' + req.body.name + '\n' + req.body.email + '\n\nDestination Info\nDestiantion: ' + req.body.destination + '\nAccomadation Type: ' + req.body.accomodation_type + '\nAddress: ' + req.body.address +
       '\n\nDeparture\nFlight/Bus/Train #: ' + req.body.departure_number + '\nDeparture Date: ' + req.body.departure_date.split('T')[0] + '\nDeparture Time: ' + req.body.departure_departure_time + '\nArrival Time:' + req.body.departure_arrival_time +
