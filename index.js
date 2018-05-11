@@ -31,18 +31,20 @@ app.post('/checkin', function (req, res) {
 
   let pincEmail = {
       from: 'PINC International', // sender address
-      to: 'sam2k13@gmail.com', // list of receivers
+      to: 'pincbot@gmail.com', // list of receivers
       subject: 'Weekend Check-In: ' + req.body.name + ' - ' + req.body.destination, // Subject line
-      text: 'Personal Info\n' + req.body.name + '\n' + req.body.email + '\n\nDestination Info\nDestiantion: ' + req.body.destination + '\nAccomadation Type: ' + req.body.accomodation_type + '\nAddress: ' + req.body.address + '\n\nDeparture\nDeparture Time: ' + req.body.departure_departure_time +
-      '\nArrival Time: ' +  req.body.departure_departure_time + '\n\nReturn\nDeparture Time: ' + req.body.return_departure_time + '\nArrival Time: ' + req.body.return_arrival_time// plain text body
+      text: 'Personal Info\n' + req.body.name + '\n' + req.body.email + '\n\nDestination Info\nDestiantion: ' + req.body.destination + '\nAccomadation Type: ' + req.body.accomodation_type + '\nAddress: ' + req.body.address +
+      '\n\nDeparture\nFlight/Bus/Train #: ' + req.body.departure_number + '\nDeparture Date: ' + req.body.departure_date.split('T')[0] + '\nDeparture Time: ' + req.body.departure_departure_time + '\nArrival Time:' + req.body.departure_arrival_time +
+      '\n\nReturn\nFlight/Bus/Train #: ' + req.body.return_number + '\nReturn Date: ' + req.body.return_date.split('T')[0]  + '\nDeparture Time: ' + req.body.return_departure_time + '\nArrival Time: ' + req.body.return_arrival_time// plain text body
   };
 
   let confirmEmail = {
       from: 'PINC International', // sender address
       to: req.body.email, // list of receivers
       subject: 'Check-In Submitted', // Subject line
-      text:  req.body.name + ',\nThank you for letting us know your weekend plans!  Have a great time and stay safe.\n\nLisette\n\nCheck-In Info\nDestiantion: ' + req.body.destination + '\nAccomadation Type: ' + req.body.accomodation_type + '\nAddress: ' + req.body.address + '\nDeparture\nDeparture Time: ' + req.body.departure_departure_time +
-        '\nArrival Time: ' +  req.body.departure_departure_time + '\nReturn\nDeparture Time: ' + req.body.return_departure_time + '\nArrival Time: ' + req.body.return_arrival_time// plain text body
+      text:  req.body.name + ',\nThank you for letting us know your weekend plans!  Have a great time and stay safe.\n\nLisette\n\nCheck-In Info\nDestiantion: ' + req.body.destination + '\nAccomadation Type: ' + req.body.accomodation_type + '\nAddress: ' + req.body.address +
+      '\n\nDeparture\nFlight/Bus/Train #: ' + req.body.departure_number + '\nDeparture Date: ' + req.body.departure_date.split('T')[0] + '\nDeparture Time: ' + req.body.departure_departure_time + '\nArrival Time:' + req.body.departure_arrival_time +
+      '\n\nReturn\nFlight/Bus/Train #: ' + req.body.return_number + '\nReturn Date: ' + req.body.return_date.split('T')[0]  + '\nDeparture Time: ' + req.body.return_departure_time + '\nArrival Time: ' + req.body.return_arrival_time// plain text body
   };
 
   if(req.body.passcode == "hoi145k"){
@@ -73,5 +75,3 @@ app.get('/', function (req, res) {
 
 // setup server
 app.listen(1332);
-
-
